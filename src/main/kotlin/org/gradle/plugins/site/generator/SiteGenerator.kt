@@ -9,5 +9,6 @@ import org.gradle.plugins.site.data.ProjectLinksDescriptor
  * The default implementation of this interface is [org.gradle.plugins.site.generator.FreemarkerSiteGenerator].
  */
 interface SiteGenerator {
+    //
     fun generate(projectDescriptor: ProjectDescriptor, projectLinksDescriptor: ProjectLinksDescriptor)
 }
