@@ -211,10 +211,10 @@ publishing {
     }
 }
 
-signing {
-    useGpgCmd()
-    sign(configurations.archives.get())
-    setRequired(Callable {
-        gradle.taskGraph.hasTask("publishPlugins")
-    })
-}
+// signing {
+//     useGpgCmd()
+//     sign(configurations.archives.get())
+//     setRequired(Callable {
+//         gradle.taskGraph.hasTask("publishPlugins")
+//     })
+// }
