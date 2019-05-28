@@ -9,9 +9,15 @@ pipeline {
                 sh './gradlew build'
             }
         }
-        stage('Test') {
+        stage('Register artifact in ComplianceDB') {
             steps {
-                echo 'Testing..'
+                echo 'Registering artifact in ComplianceDB...'
+                sh 'ls build/libs'
+                sh '''
+                    ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/gradle-site-plugin-0.6.jar | cut -d " " -f 2 -)
+                    echo "Artifact SHA is $ARTIFACT_SHA"
+                    echo ./create_artifact cern hadroncollider $ARTIFACT_SHA gradle-site-plugin-0.6.jar "Created by build ${BUILD_NUMBER}"
+                '''
             }
         }
         stage('Deploy') {
