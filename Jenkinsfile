@@ -6,6 +6,7 @@ pipeline {
             steps {
                 sh 'javac -version'
                 echo 'Building..'
+                sh './gradlew build'
             }
         }
         stage('Test') {
