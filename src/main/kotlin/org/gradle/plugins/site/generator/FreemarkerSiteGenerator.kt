@@ -21,7 +21,7 @@ class FreemarkerSiteGenerator(private val outputDir: File) : SiteGenerator {
             copyImgResources()
             processIndexPageTemplate(projectDescriptor, projectLinksDescriptor)
         } catch (e: Exception) {
-            throw GradleException("Unable to generate site", e)
+            throw GradleException("Unable to generate site this time", e)
         }
 
     }
