@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh './gradlew clean'
                 sh 'javac -version'
                 echo 'Building..'
                 sh './gradlew build'
@@ -19,14 +20,18 @@ pipeline {
                     echo ARTIFACT_SHA=$ARTIFACT_SHA > artifact.sha
                     ./create_artifact.sh cern hadroncollider $ARTIFACT_SHA gradle-site-plugin-0.6.jar "Created by build ${BUILD_NUMBER}"
                 '''
-                stash 'artifact.sha'
+                stash includes: 'build/libs/*', name: 'build'
             }
         }
         stage('Add Code Review information') {
             steps {
-                unstash 'artifact.sha'
-                sh "cat artfact.sha"
-                sh 'source artifact.sha && echo MY_SHA=$ARTIFACT_SHA'
+                dir('build/libs') { unstash 'build' }
+                sh '''
+                    ls -l build/libs
+                    ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/gradle-site-plugin-0.6.jar | cut -d " " -f 2 -)
+                    ./add_evidence.sh cern hadroncollider $ARTIFACT_SHA 'code review performed'
+                '''
+                sh 'ls -l'
                 echo 'Deploying....'
             }
         }
