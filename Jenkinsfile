@@ -37,7 +37,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Gathering code review information....'
+                echo 'Gathering integration test information....'
                 dir('build/libs') { unstash 'build' }
                 sh '''
                     ls -l build/libs
