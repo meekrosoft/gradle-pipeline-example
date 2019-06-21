@@ -25,14 +25,27 @@ pipeline {
         }
         stage('Add Code Review information') {
             steps {
+                echo 'Gathering code review information....'
                 dir('build/libs') { unstash 'build' }
                 sh '''
                     ls -l build/libs
                     ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/gradle-site-plugin-0.6.jar | cut -d " " -f 2 -)
                     ./add_evidence.sh cern hadroncollider $ARTIFACT_SHA 'code review performed'
+                    sleep 10
                 '''
-                sh 'ls -l'
-                echo 'Deploying....'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Gathering code review information....'
+                dir('build/libs') { unstash 'build' }
+                sh '''
+                    ls -l build/libs
+                    ls -l
+                    ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/gradle-site-plugin-0.6.jar | cut -d " " -f 2 -)
+                    ./add_evidence.sh cern hadroncollider $ARTIFACT_SHA 'Integration tests performed'
+                    sleep 10
+                '''
             }
         }
     }
