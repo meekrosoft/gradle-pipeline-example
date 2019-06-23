@@ -28,10 +28,10 @@ pipeline {
                 echo 'Gathering code review information....'
                 dir('build/libs') { unstash 'build' }
                 sh '''
+                    sleep 10
                     ls -l build/libs
                     ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/gradle-site-plugin-0.6.jar | cut -d " " -f 2 -)
-                    ./add_evidence.sh cern hadroncollider $ARTIFACT_SHA 'code review performed'
-                    sleep 10
+                    ./add_evidence.sh cern hadroncollider $ARTIFACT_SHA "code review performed in build ${BUILD_NUMBER}"
                 '''
             }
         }
@@ -40,11 +40,11 @@ pipeline {
                 echo 'Gathering integration test information....'
                 dir('build/libs') { unstash 'build' }
                 sh '''
+                    sleep 10
                     ls -l build/libs
                     ls -l
                     ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/gradle-site-plugin-0.6.jar | cut -d " " -f 2 -)
-                    ./add_evidence.sh cern hadroncollider $ARTIFACT_SHA 'Integration tests performed'
-                    sleep 10
+                    ./add_evidence.sh cern hadroncollider $ARTIFACT_SHA "Integration tests performed in build ${BUILD_NUMBER}"
                 '''
             }
         }

@@ -12,6 +12,6 @@
 
 curl -H 'Content-Type: application/json' \
      -X PUT \
-     -d '{"evidence_type": "'"$4"'", "contents": {"url": "http://server.example.com/'"$4"'", "description": "Adding '"$4"' evidence"}}' \
+     -d '{"evidence_type": "'"$4"'", "contents": {"url": "http://server.example.com/'"$4"'", "description": "Adding evidence: '"$4"'"}}' \
     http://hub/api/projects/$1/$2/artifacts/$3
 
