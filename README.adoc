@@ -6,7 +6,7 @@
 = Gradle Site Plugin image:{travis}.svg?branch=master["Build Status", link="{travis}"] image:https://img.shields.io/badge/build-scan-green.svg["Build Scan", link="https://gradle.com/s/thgfe3dxihijo"] image:https://img.shields.io/maven-metadata/v/https/{maven-metadata}/maven-metadata.xml.svg?label=gradlePluginPortal["Maven Central",link="{gradle-plugins-portal}"]
 
 
-A sample Gradle plugin demonstrating established techniques and practices for plugin development as described in the following guides:
+A not-so-simple sample Gradle plugin demonstrating established techniques and practices for plugin development as described in the following guides:
 
 - link:https://guides.gradle.org/designing-gradle-plugins/[Designing Gradle plugins]
 - link:https://guides.gradle.org/implementing-gradle-plugins/[Implementing Gradle plugins]
