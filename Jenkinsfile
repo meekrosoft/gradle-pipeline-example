@@ -31,7 +31,7 @@ pipeline {
                     sleep 10
                     ls -l build/libs
                     ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/gradle-site-plugin-0.6.jar | cut -d " " -f 2 -)
-                    ./add_evidence.sh cern hadroncollider $ARTIFACT_SHA "code review performed in build ${BUILD_NUMBER}"
+                    ./add_evidence_review.sh cern hadroncollider $ARTIFACT_SHA APPROVED "Code review checked in build ${BUILD_NUMBER}"
                 '''
             }
         }
