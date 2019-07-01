@@ -48,5 +48,18 @@ pipeline {
                 '''
             }
         }
+        stage('Security Scan') {
+            steps {
+                echo 'Performing security vulnerability scan....'
+                dir('build/libs') { unstash 'build' }
+                sh '''
+                    sleep 10
+                    ls -l build/libs
+                    ls -l
+                    ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/gradle-site-plugin-0.6.jar | cut -d " " -f 2 -)
+                    ./add_evidence.sh cern hadroncollider $ARTIFACT_SHA security_scan "Security scan performed in build ${BUILD_NUMBER}"
+                '''
+            }
+        }
     }
 }
