@@ -44,7 +44,7 @@ pipeline {
                     ls -l build/libs
                     ls -l
                     ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/gradle-site-plugin-0.6.jar | cut -d " " -f 2 -)
-                    ./add_evidence.sh cern hadroncollider $ARTIFACT_SHA integration_test "Integration tests performed in build ${BUILD_NUMBER}"
+                    ./add_evidence_integration_tests.sh cern hadroncollider $ARTIFACT_SHA integration_test "Integration tests performed in build ${BUILD_NUMBER}"
                 '''
             }
         }
@@ -57,7 +57,7 @@ pipeline {
                     ls -l build/libs
                     ls -l
                     ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/gradle-site-plugin-0.6.jar | cut -d " " -f 2 -)
-                    ./add_evidence.sh cern hadroncollider $ARTIFACT_SHA security_scan "Security scan performed in build ${BUILD_NUMBER}"
+                    ./add_evidence_security.sh cern hadroncollider $ARTIFACT_SHA security_scan "Security scan performed in build ${BUILD_NUMBER}"
                 '''
             }
         }
