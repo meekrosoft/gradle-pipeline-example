@@ -14,4 +14,4 @@
 curl -H 'Content-Type: application/json' \
      -X PUT \
      -d '{"sha256": "'"$3"'", "filename": "'"$4"'", "description": "'"$5"'", "git_commit": "'"$6"'"}' \
-    http://localhost/api/projects/$1/$2/artifacts
+    http://hub/api/projects/$1/$2/artifacts
