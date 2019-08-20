@@ -1,1 +1,1 @@
-rootProject.name = "gradle-site-plugin"
+rootProject.name = "accelerator"

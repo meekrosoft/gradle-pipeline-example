@@ -15,10 +15,10 @@ pipeline {
                 echo 'Registering artifact in ComplianceDB...'
                 sh 'ls build/libs'
                 sh '''
-                    ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/gradle-site-plugin-0.6.jar | cut -d " " -f 2 -)
+                    ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/accelerator-0.6.jar | cut -d " " -f 2 -)
                     echo "Artifact SHA is $ARTIFACT_SHA"
                     echo ARTIFACT_SHA=$ARTIFACT_SHA > artifact.sha
-                    ./create_artifact.sh cern hadroncollider $ARTIFACT_SHA gradle-site-plugin-0.6.jar "Created by build ${BUILD_NUMBER}" "${GIT_COMMIT}"
+                    ./create_artifact.sh cern hadroncollider $ARTIFACT_SHA accelerator-0.6.jar "Created by build ${BUILD_NUMBER}" "${GIT_COMMIT}"
                 '''
                 stash includes: 'build/libs/*', name: 'build'
             }
@@ -30,7 +30,7 @@ pipeline {
                 sh '''
                     sleep 10
                     ls -l build/libs
-                    ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/gradle-site-plugin-0.6.jar | cut -d " " -f 2 -)
+                    ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/accelerator-0.6.jar | cut -d " " -f 2 -)
                     ./add_evidence_review.sh cern hadroncollider $ARTIFACT_SHA APPROVED "Code review checked in build ${BUILD_NUMBER}"
                 '''
             }
@@ -43,7 +43,7 @@ pipeline {
                     sleep 10
                     ls -l build/libs
                     ls -l
-                    ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/gradle-site-plugin-0.6.jar | cut -d " " -f 2 -)
+                    ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/accelerator-0.6.jar | cut -d " " -f 2 -)
                     ./add_evidence_integration_tests.sh cern hadroncollider $ARTIFACT_SHA integration_test "Integration tests performed in build ${BUILD_NUMBER}"
                 '''
             }
@@ -56,7 +56,7 @@ pipeline {
                     sleep 10
                     ls -l build/libs
                     ls -l
-                    ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/gradle-site-plugin-0.6.jar | cut -d " " -f 2 -)
+                    ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/accelerator-0.6.jar | cut -d " " -f 2 -)
                     ./add_evidence_security.sh cern hadroncollider $ARTIFACT_SHA security_scan "Security scan performed in build ${BUILD_NUMBER}"
                 '''
             }
