@@ -18,7 +18,7 @@ pipeline {
                     ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/accelerator-0.6.jar | cut -d " " -f 2 -)
                     echo "Artifact SHA is $ARTIFACT_SHA"
                     echo ARTIFACT_SHA=$ARTIFACT_SHA > artifact.sha
-                    ./create_artifact.sh cern hadroncollider $ARTIFACT_SHA accelerator-0.6.jar "Created by build ${BUILD_NUMBER}" "${GIT_COMMIT}" "${GIT_URL}commit/${GIT_COMMIT}" "${BUILD_URL}"
+                    ./create_artifact.sh cern hadroncollider $ARTIFACT_SHA accelerator-0.6.jar "Created by build ${BUILD_NUMBER}" "${GIT_COMMIT}" "${GIT_URL}/commit/${GIT_COMMIT}" "${BUILD_URL}"
                 '''
                 stash includes: 'build/libs/*', name: 'build'
             }
