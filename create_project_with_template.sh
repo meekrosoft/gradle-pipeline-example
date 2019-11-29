@@ -11,4 +11,4 @@
 curl -H 'Content-Type: application/json' \
      -X PUT \
      -d '{"name": "'"$2"'", "description": "'"$3"'", "owner": "'"$4"'", "template": ["artifact", "code_review", "integration_test", "security_scan"]}' \
-    $1/api/projects/$4
+    $1/api/v1/projects/$4/

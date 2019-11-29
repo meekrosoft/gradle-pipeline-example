@@ -14,5 +14,5 @@
 curl -H 'Content-Type: application/json' \
      -X PUT \
      -d '{"evidence_type": "code_review", "contents": {"url": "https://www.github.com/meekrosoft/gradle-pipeline-example/pull/1", "state": "'"$4"'", "description": "Adding evidence: '"$5"'"}}' \
-    http://hub/api/projects/$1/$2/artifacts/$3
+    http://hub/api/v1/projects/$1/$2/artifacts/$3
 
