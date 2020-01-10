@@ -13,6 +13,6 @@
 
 curl -H 'Content-Type: application/json' \
      -X PUT \
-     -d '{"evidence_type": "'"$4"'", "contents": {"security_result": "No vulnerabilities found.", "description": "Adding evidence: '"$5"'"}}' \
+     -d '{"evidence_type": "'"$4"'", "contents": {"is_compliant": "true", "security_result": "No vulnerabilities found.", "description": "Adding evidence: '"$5"'"}}' \
     http://hub/api/v1/projects/$1/$2/artifacts/$3
 

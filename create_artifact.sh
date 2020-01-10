@@ -15,5 +15,5 @@
 
 curl -H 'Content-Type: application/json' \
      -X PUT \
-     -d '{"sha256": "'"$3"'", "filename": "'"$4"'", "description": "'"$5"'", "git_commit": "'"$6"'", "commit_url": "'"$7"'", "build_url": "'"$8"'"}' \
+     -d '{"sha256": "'"$3"'", "filename": "'"$4"'", "description": "'"$5"'", "git_commit": "'"$6"'", "commit_url": "'"$7"'", "build_url": "'"$8"'", "is_compliant": "true"}' \
     http://hub/api/v1/projects/$1/$2/artifacts/
