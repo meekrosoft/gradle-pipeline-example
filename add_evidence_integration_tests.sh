@@ -14,5 +14,5 @@
 curl -H 'Content-Type: application/json' \
      -X PUT \
      -d '{"evidence_type": "'"$4"'", "contents": {"is_compliant": "true", "test_report_url": "http://server.example.com/'"$4"'", "description": "Adding evidence: '"$5"'"}}' \
-    http://nginx/api/v1/projects/$1/$2/artifacts/$3
+    http://server/api/v1/projects/$1/$2/artifacts/$3
 
