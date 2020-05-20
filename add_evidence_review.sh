@@ -1,5 +1,5 @@
 #! /bin/bash
-
+set -e
 # USAGE:
 # $1 host
 # $2 organization
