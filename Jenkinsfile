@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+
+    environment {
+        CDB_HOST = 'http://server:8001'
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -18,7 +23,7 @@ pipeline {
                     ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/accelerator-0.6.jar | cut -d " " -f 2 -)
                     echo "Artifact SHA is $ARTIFACT_SHA"
                     echo ARTIFACT_SHA=$ARTIFACT_SHA > artifact.sha
-                    ./create_artifact.sh cern hadroncollider $ARTIFACT_SHA accelerator-0.6.jar "Created by jenkins build ${BUILD_NUMBER}" "${GIT_COMMIT}" "${GIT_URL}commit/${GIT_COMMIT}" "${BUILD_URL}"
+                    ./create_artifact.sh ${CDB_HOST} cern hadroncollider $ARTIFACT_SHA accelerator-0.6.jar "Created by jenkins build ${BUILD_NUMBER}" "${GIT_COMMIT}" "${GIT_URL}commit/${GIT_COMMIT}" "${BUILD_URL}"
                 '''
                 stash includes: 'build/libs/*', name: 'build'
             }
@@ -31,7 +36,7 @@ pipeline {
                     sleep 10
                     ls -l build/libs
                     ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/accelerator-0.6.jar | cut -d " " -f 2 -)
-                    ./add_evidence_review.sh cern hadroncollider $ARTIFACT_SHA APPROVED "Code review checked in build ${BUILD_NUMBER}"
+                    ./add_evidence_review.sh ${CDB_HOST} cern hadroncollider $ARTIFACT_SHA APPROVED "Code review checked in build ${BUILD_NUMBER}"
                 '''
             }
         }
@@ -44,7 +49,7 @@ pipeline {
                     ls -l build/libs
                     ls -l
                     ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/accelerator-0.6.jar | cut -d " " -f 2 -)
-                    ./add_evidence_integration_tests.sh cern hadroncollider $ARTIFACT_SHA integration_test "Integration tests performed in build ${BUILD_NUMBER}"
+                    ./add_evidence_integration_tests.sh ${CDB_HOST} cern hadroncollider $ARTIFACT_SHA integration_test "Integration tests performed in build ${BUILD_NUMBER}"
                 '''
             }
         }
@@ -57,7 +62,7 @@ pipeline {
                     ls -l build/libs
                     ls -l
                     ARTIFACT_SHA=$(openssl dgst -sha256 build/libs/accelerator-0.6.jar | cut -d " " -f 2 -)
-                    ./add_evidence_security.sh cern hadroncollider $ARTIFACT_SHA security_scan "Security scan performed in build ${BUILD_NUMBER}"
+                    ./add_evidence_security.sh ${CDB_HOST} cern hadroncollider $ARTIFACT_SHA security_scan "Security scan performed in build ${BUILD_NUMBER}"
                 '''
             }
         }
